@@ -1,14 +1,16 @@
 # GitLab-MR-Checker
 
-Get MR Titles which You are assigned to !
+Get MR Titles which You are assigned to!
 
-## How It Works
+## Features
 
-WIP
++ You can check MR lists you are assigned to.
++ It filters MR which was closed.
++ It filters MR which has prefix "WIP".
 
 ## Quick Start on Terminal
 
-#### 1. Fill the variables in `gitlab-mr-from-commit`
+#### 1. Fill the variables in `gitlab-mr-check.sh`
 
 ```sh
 # Get it from gitlab
@@ -26,21 +28,44 @@ PROJECT_BASE_URL='[YOUR PROJECT BASE URL]'
 PROJECT_DIRECTORY='[YOUR PROJECT DIRECTORY]'
 ```
 
-#### 2. Set the PATH
+#### 2. Execute!!
 
 ```sh
-# In your .bashrc or .zshrc or so
-# Set the PATH as bellow
-export PATH="$HOME/gitlab-mr-from-commit:$PATH"
-```
-
-#### 3. Execute!!
-
-```sh
-# It will show MR Titles
-$ gitlab-mr-check
+# It will show MR Titles in the result window
+$ gitlab-mr-check.sh
 ```
 
 ## Start on Emacs
 
-WIP
+In the first step, you should fill the variables in `gitlab-mr-check.sh`.
+
+#### 1. Edit `shell-path` in `gitlab-mr-check.el`
+
+This package needs to call external shellscript.
+
+```el
+;; You need to edit this path
+(defvar shell-path "path/to/gitlab-mr-check.sh")
+```
+
+#### 2. Install `shackle.el` from MELPA
+
+This package use `shackle` to show the result window.
+
+```el
+M-x install-packege RET shackle
+```
+
+#### 3. Edit `init.el`
+
+```el
+;; add path
+(add-to-list 'load-path "~/.emacs.d/gitlab-mr-check")
+(require 'gitlab-mr-check)
+```
+
+#### 4. Execute!!
+
+```el
+M-x gitlab-mr-check RET
+```
