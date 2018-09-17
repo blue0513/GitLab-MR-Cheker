@@ -2,6 +2,8 @@
 
 Get MR Titles which You are assigned to!
 
+![image](./images/image.png)
+
 ## Features
 
 + You can check MR lists you are assigned to.
