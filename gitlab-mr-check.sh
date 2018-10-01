@@ -12,12 +12,6 @@ PROJECT_ID='[YOUR PROJECT ID]'
 # It should be like 'https://gitlab.com'
 PROJECT_BASE_URL='[YOUR PROJECT BASE URL]'
 
-# NOTE: Directory should be 'my-project/product1'
-PROJECT_DIRECTORY='[YOUR PROJECT DIRECTORY]'
-
-# It should be 'httsp://gitlab.com/my-project/product1'
-PROJECT_URL="${PROJECT_BASE_URL}/${PROJECT_DIRECTORY}"
-
 # It should be like 'blue0513'
 YOUR_USER_NAME='[YOUR USER NAME in GitLab]'
 
@@ -27,7 +21,7 @@ YOUR_USER_NAME='[YOUR USER NAME in GitLab]'
 main() {
     curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" ${PROJECT_BASE_URL}/api/v4/projects/${PROJECT_ID}/merge_requests)
 
-    assigned_mrs=$(echo "${curl_response}" | jq ".[] | select(.assignee.name == "\"${YOUR_USER_NAME}\"")")
+    assigned_mrs=$(echo "${curl_response}" | jq ".[] | select(.assignee.username == "\"${YOUR_USER_NAME}\"")")
 
     # Filter Closed
     active_assigned_mrs=$(echo "${assigned_mrs}" | jq 'select(.state == "opened")')
